@@ -23,7 +23,6 @@ const GamePlay = () => {
     const [showBtn, setShowBtn] = useState(true);
     const [showSelketon, setShowSelketon] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [isDisable, setIsDisable] = useState(true);
 
     const dispatch = useDispatch();
     const link = useNavigate();
@@ -89,26 +88,6 @@ const GamePlay = () => {
             },
         ]);
     };
-
-    // useEffect(() => {
-    //     if (playerCount === players.length) {
-    //         setQuestionNum(questionNum => questionNum + 1);
-    //         dispatch(playerResult(null, null, null, null, questionNum + 1));
-    //         setPlayerCount(0);
-    //     }
-    // }, [showBtn]);
-
-    // useEffect(() => {
-    //     axios.getImage().then((response) => {
-    //         setImage(response.image);
-    //         setApiAnswer(response.answer);
-    //     });
-    // }, [showBtn]);
-
-    // useEffect(() => {
-    //     apiAnswer === answer ? setCheckAnswer('yes') : setCheckAnswer('no');
-    // }, [answer]);
-
 
     return (
         <div className='game-container'>

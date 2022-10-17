@@ -12,7 +12,6 @@ const History = () => {
     const getResults = useSelector(results)
     const resultApi = useSelector(resultsApi);
 
-    console.log("ee", resultApi);
 
     const tableItem = getResults.map((results, index) => {
         return (

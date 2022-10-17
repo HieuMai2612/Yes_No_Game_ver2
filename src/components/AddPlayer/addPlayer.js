@@ -19,7 +19,6 @@ const AddPlayer = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const dispatch = useDispatch();
-    const playerName = useSelector(getPlayer);
 
     const handleChange = (event) => {
         setName(event.target.value);

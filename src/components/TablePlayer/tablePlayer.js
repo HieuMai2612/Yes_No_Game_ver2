@@ -17,7 +17,6 @@ const TablePlayer = () => {
     const [name, setName] = useState('');
     const getPlayers = useSelector(getPlayer);
     const getId = useSelector(idPlayer);
-    console.log(getPlayers.length, 'diii')
     const closeAdd = () => setShow(false);
     const showAdd = () => setShow(true);
     const dispatch = useDispatch();
@@ -54,7 +53,6 @@ const TablePlayer = () => {
             </tr>
         );
     });
-    console.log(getPlayers)
 
     const handleChangeRound = (e) => {
         setRound(e.target.value);
@@ -71,12 +69,6 @@ const TablePlayer = () => {
             console.log(error)
         }
     };
-
-    // const [numberInput, setNumberInput] = useState("")
-    // function onTextChanged(value) {
-    //     setNumberInput(value.replace(/[^0-9]/, ""))
-    // }
-
 
 
     return (

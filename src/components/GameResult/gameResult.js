@@ -14,19 +14,17 @@ const GameResult = () => {
     const player = useSelector(getPlayer);
     const resultApi = useSelector(resultsApi);
     const resultPlayer = useSelector(results);
-    const [showSelketon, setShowSelketon] = useState(false);
+
     const [image, setImage] = useState();
     const dispatch = useDispatch();
     const link = useNavigate();
     const [playerAnswer, setPlayerAnswer] = useState([resultPlayer]);
 
-    console.log(resultApi[0].result, 'api')
 
     const handleSumary = (resultApi) => {
         setPlayerAnswer([
             ...playerAnswer.concat(resultApi)
         ]);
-        console.log(playerAnswer)
     }
 
 
