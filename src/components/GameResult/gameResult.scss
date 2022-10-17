@@ -1,0 +1,77 @@
+.game-header {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .game-title {
+    font-size: 30px;
+    margin-right: 350px;
+  }
+}
+
+.game-body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  &-round {
+    font-size: 30px;
+  }
+  &-info {
+    margin: 10px;
+  }
+  &-play {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  &-choose {
+    display: flex;
+    margin: 60px;
+    &-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn-result {
+    }
+    .result-message {
+      margin: 10px 80px;
+      &-correct {
+        background-color: rgb(19, 212, 8);
+        color: white;
+        width: 120px;
+        height: 40px;
+        border-radius: 5px;
+      }
+      &-incorrect {
+        background-color: rgb(212, 8, 8);
+        color: white;
+        width: 120px;
+        height: 40px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+.game-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .btn-submit {
+    background-color: rgb(219, 70, 95);
+    color: white;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+  }
+  .loading {
+    background-color: rgb(222, 222, 222);
+    color: black;
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+  }
+}

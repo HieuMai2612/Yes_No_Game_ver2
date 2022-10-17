@@ -18,8 +18,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
+}
+
+.App-title {
+  margin-top: 40px;
+  font-size: 45px
+}
+
+.App-content {
+  font-size: 20px;
+  margin: 10px 120px;
 }
 
 .App-link {
@@ -30,9 +39,11 @@
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(10px);
   }
+
   100% {
     transform: translateY(0px);
   }
