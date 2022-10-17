@@ -92,11 +92,11 @@ const GameResult = () => {
             </div>
 
             <div className='game-footer'>
-                {/* <Link to="/history">
-                </Link> */}
-                <Button onClick={handleSumary} variant="success" className='btn-result '>
-                    Summary
-                </Button>
+                <Link to="/history">
+                    <Button onClick={handleSumary} variant="success" className='btn-result '>
+                        Summary
+                    </Button>
+                </Link>
             </div>
         </div >
     );
