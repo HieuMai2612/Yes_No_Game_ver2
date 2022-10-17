@@ -59,8 +59,10 @@ const GameResult = () => {
                 </div>
                 <Button className='history-btn' variant="outline-dark">Good luck</Button>
             </div>
-            {resultApi.map((item, index) => (
-                <div className='game-body-play'>
+            <div className='game-body-play'>
+
+                {resultApi.map((item, index) => (
+
                     <div className='game-body-choose' key={item}>
 
                         <div>Round {item.round} </div>
@@ -85,8 +87,10 @@ const GameResult = () => {
 
 
                     </div>
-                </div>
-            ))}
+
+                ))}
+            </div>
+
             <div className='game-footer'>
                 {/* <Link to="/history">
                 </Link> */}

@@ -14,15 +14,6 @@ const History = () => {
 
     console.log("ee", resultApi)
 
-
-    // const matchResult = getResults.filter((match) => {
-    //     if (match.matchId === questionNum) {
-    //         return match;
-    //     }
-    // });
-
-    // const search = matchResult.filter((item) => item?.name?.includes(text));
-
     const tableItem = getResults.map((results, index) => {
         return (
             <tr key={index}>
