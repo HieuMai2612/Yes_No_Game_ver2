@@ -12,7 +12,7 @@ const History = () => {
     const getResults = useSelector(results)
     const resultApi = useSelector(resultsApi);
 
-    console.log("ee", resultApi)
+    console.log("ee", resultApi);
 
     const tableItem = getResults.map((results, index) => {
         return (
@@ -21,8 +21,18 @@ const History = () => {
                 <td>{results?.namePlayer}</td>
                 <td>{results?.date}</td>
                 <td>{results?.answer}</td>
-                <td>{2}</td>
-                <td>{results?.result === 'yes' ? '1' : '0'}</td>
+                <td>2</td>
+                <td>0</td>
+            </tr>
+        );
+    });
+
+    const playerSum = getResults.map((results, index) => {
+        return (
+            <tr key={index}>
+                <td>{results?.namePlayer}</td>
+                <td>100 %</td>
+                <td>000</td>
             </tr>
         );
     });
@@ -69,19 +79,7 @@ const History = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Mark</td>
-                        <td>0%</td>
-                        <td>0</td>
-
-                    </tr>
-                    <tr>
-                        <td>Hennry</td>
-                        <td>100%</td>
-                        <td>1</td>
-
-                    </tr>
-
+                    {playerSum}
                 </tbody>
             </Table>
         </>
