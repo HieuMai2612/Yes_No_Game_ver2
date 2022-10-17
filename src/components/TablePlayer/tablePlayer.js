@@ -8,9 +8,10 @@ import {
     getPlayer,
     getPlayerName,
     idPlayer,
-    saveRoundList,
+    saveRoundList, saveResultApi,
+    roundList
 } from '../../features/counter/counterSlice';
-
+import axios from 'axios';
 
 const TablePlayer = () => {
     const [show, setShow] = useState(false);
@@ -21,6 +22,8 @@ const TablePlayer = () => {
     const showAdd = () => setShow(true);
     const dispatch = useDispatch();
 
+
+    const getRoundList = useSelector(roundList);
 
 
     //Set Round 
@@ -61,6 +64,13 @@ const TablePlayer = () => {
         try {
             if (typeof JSON.parse(round) === "number") {
                 dispatch(saveRoundList(Array.from(Array(JSON.parse(round)).keys())));
+                getRoundList.map(async (item) => {
+                    await axios.get("https://yesno.wtf/api").then((res) => {
+                        dispatch(saveResultApi({ round: item, result: res.data.answer })
+                        );
+                    });
+
+                })
                 link("/game-play");
             } else {
                 return;

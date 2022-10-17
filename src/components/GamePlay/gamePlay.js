@@ -51,15 +51,19 @@ const GamePlay = () => {
                 setShowSelketon(false);
                 setShowBtn(true);
             }, 2000);
-            round.map(async (item) => {
-                await axios.get("https://yesno.wtf/api").then((res) => {
-                    dispatch(saveResultApi({ round: item, result: res.data.answer })
-                    );
-                });
-                setTimeout(() => {
-                    link("/game-result");
-                }, 1000);
-            });
+
+            setTimeout(() => {
+                link("/game-result");
+            }, 1000);
+            // round.map(async (item) => {
+            //     await axios.get("https://yesno.wtf/api").then((res) => {
+            //         dispatch(saveResultApi({ round: item, result: res.data.answer })
+            //         );
+            //     });
+            //   
+            // });
+
+
 
         }
     }
@@ -148,13 +152,6 @@ const GamePlay = () => {
                     Loading...
                 </Button>}
 
-                {/* {showSummaryBtn &&
-                    <Link to="/history">
-                        <Button variant="success" className='btn-result '>
-                            Summary
-                        </Button>
-                    </Link>
-                } */}
             </div>
         </div >
     );
