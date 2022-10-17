@@ -50,6 +50,7 @@ export const counterSlice = createSlice({
 
     saveResult: (state, action) => {
       state.results = [...state.results, ...action.payload];
+
     },
     saveResultApi: (state, action) => {
       state.resultsApi.push(action.payload);

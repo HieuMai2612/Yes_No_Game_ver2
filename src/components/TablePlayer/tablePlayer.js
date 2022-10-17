@@ -118,8 +118,6 @@ const TablePlayer = () => {
 
                     </Modal.Footer>
                 </Modal>
-
-
             </div>
 
             <div className='Footer-input'>

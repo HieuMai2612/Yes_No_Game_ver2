@@ -15,7 +15,6 @@ const AddPlayer = () => {
     const [name, setName] = useState('');
     const [show, setShow] = useState(false);
     const getId = useSelector(idPlayer);
-    console.log(getId, 's')
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const dispatch = useDispatch();

@@ -9,7 +9,8 @@ import {
     indexPlayer,
     nextPlayer,
     saveResultApi,
-    saveResult
+    saveResult,
+    resultsApi
 } from '../../features/counter/counterSlice';
 import axios from 'axios';
 // import axios from '../../api/Api';
@@ -26,10 +27,6 @@ const GamePlay = () => {
 
     const dispatch = useDispatch();
     const link = useNavigate();
-
-
-
-
 
     const onClickSubmit = () => {
         if (playerIndex < player.length - 1) {
@@ -56,7 +53,8 @@ const GamePlay = () => {
             }, 2000);
             round.map(async (item) => {
                 await axios.get("https://yesno.wtf/api").then((res) => {
-                    dispatch(saveResultApi({ round: item, result: res.data.answer }));
+                    dispatch(saveResultApi({ round: item, result: res.data.answer })
+                    );
                 });
                 setTimeout(() => {
                     link("/game-result");
