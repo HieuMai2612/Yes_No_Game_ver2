@@ -47,7 +47,7 @@ const GameResult = () => {
     useEffect(() => {
         axios.get("https://yesno.wtf/api").then((res) => setImage(res.data.image));
     }, []);
-
+    console.log(resultApi)
     return (
         <div className='game-container'>
             <div className='game-header'>
@@ -82,10 +82,7 @@ const GameResult = () => {
                                 />
                             </div>
                         </div>
-
-
                     </div>
-
                 ))}
             </div>
 

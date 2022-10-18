@@ -60,18 +60,21 @@ const TablePlayer = () => {
     const handleChangeRound = (e) => {
         setRound(e.target.value);
     };
-    const handleStart = () => {
+    const handleStart = async () => {
         try {
             if (typeof JSON.parse(round) === "number") {
                 dispatch(saveRoundList(Array.from(Array(JSON.parse(round)).keys())));
-                getRoundList.map(async (item) => {
+                await getRoundList.map(async (item) => {
                     await axios.get("https://yesno.wtf/api").then((res) => {
                         dispatch(saveResultApi({ round: item, result: res.data.answer })
                         );
                     });
 
-                })
-                link("/game-play");
+                });
+                setTimeout(() => {
+                    link("/game-play");
+
+                }, 2000);
             } else {
                 return;
             }

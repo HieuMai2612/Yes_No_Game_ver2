@@ -14,6 +14,7 @@ const initialState = {
   answer: "",
   resultsApi: [],
   results: [],
+  getAllResults: {}
 };
 
 
@@ -56,6 +57,11 @@ export const counterSlice = createSlice({
       state.resultsApi.push(action.payload);
     },
 
+    // saveAllResult: (state, action) => {
+    //   const data = action.payload
+    //   state.getAllResults[data.player].idPlayer = data.id
+    // }
+
   },
 
   extraReducers: (builder) => {
@@ -89,5 +95,6 @@ export const indexPlayer = (state) => state.counter.indexPlayer;
 export const results = (state) => state.counter.results;
 export const resultsApi = (state) => state.counter.resultsApi;
 export const createdAt = (state) => state.counter.createdAt;
+export const getAllResults = (state) => state.counter.getAllResults;
 
 export default counterSlice.reducer;
