@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
-import { results, resultsApi } from '../../features/counter/counterSlice';
+import { results, resultsApi, getAllResults } from '../../features/counter/counterSlice';
 
 const History = () => {
 
-    const getResults = useSelector(results)
-    const resultApi = useSelector(resultsApi);
+
+    const allResult = useSelector(getAllResults);
+    const getListResults = Object.values(allResult);
 
     //search
     const [text, setText] = useState('');
@@ -21,17 +22,27 @@ const History = () => {
         console.log(e.target.value)
     };
 
-    const filtered = !text ? getResults : getResults.filter((results) => results?.namePlayer.toLowerCase().includes(text.toLowerCase()))
+    const filtered = !text ? getListResults : getListResults.filter((results) => results?.namePlayer.toLowerCase().includes(text.toLowerCase()))
 
     const tableItem = filtered.map((results, index) => {
         return (
             <tr key={index}>
-                <td>{results?.round}</td>
+                <td>{results?.idPlayer}</td>
                 <td>{results?.namePlayer}</td>
-                <td>00/12/2000</td>
-                <td>{results?.answer}</td>
-                <td>2</td>
-                <td>0</td>
+                <td>{results?.createdAt.slice(0, results.createdAt.length / 2)
+                    .map((item) => (
+                        <div>{item}</div>
+                    ))
+                }</td>
+                <td>{results?.answer.slice(0, results.answer.length / 2)
+                    .map((item) => (
+                        <div>{item}</div>
+                    ))}</td>
+                <td>{results?.answerApi.slice(0, results.answerApi.length / 2)
+                    .map((item) => (
+                        <div>{item}</div>
+                    ))}</td>
+                <td>{results?.score / 2}</td>
             </tr>
         );
     });
@@ -40,8 +51,8 @@ const History = () => {
         return (
             <tr key={index}>
                 <td>{results?.namePlayer}</td>
-                <td>100 %</td>
-                <td>000</td>
+                <td>{(results?.score / results.round) * 100} %</td>
+                <td>{results?.score / 2}</td>
             </tr>
         );
     });
@@ -51,9 +62,7 @@ const History = () => {
         <>
             <div className='game-header'>
                 <div className='game-title'>Yes No WTF GAME</div>
-                <Link to="/game-play">
-                    <Button className='history-btn' variant="outline-dark">Back</Button>
-                </Link>
+
             </div>
             <div className='history-body-match'>
                 Final results
@@ -84,12 +93,20 @@ const History = () => {
                         <th>Summary</th>
                         <th>Correct Percent</th>
                         <th>Total Score</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     {playerSum}
                 </tbody>
             </Table>
+
+
+            <div>
+                {getListResults[0].score > getListResults[1].score
+                    ? `The winner is ${getListResults[0].namePlayer}`
+                    : `The winner is ${getListResults[1].namePlayer}`}
+            </div>
         </>
     )
 }

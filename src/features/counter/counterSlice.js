@@ -9,8 +9,6 @@ const initialState = {
   playerCount: 2,
   matchId: [],
   roundList: [],
-  createdAt: new Date().toISOString(),
-  score: 0,
   answer: "",
   resultsApi: [],
   results: [],
@@ -57,10 +55,31 @@ export const counterSlice = createSlice({
       state.resultsApi.push(action.payload);
     },
 
-    // saveAllResult: (state, action) => {
-    //   const data = action.payload
-    //   state.getAllResults[data.player].idPlayer = data.id
-    // }
+    saveAllResult: (state, action) => {
+      const data = action.payload
+      if (!state.getAllResults[data.player]) {
+        state.getAllResults[data.player] = {
+          idPlayer: "",
+          round: "",
+          namePlayer: "",
+          answer: [],
+          answerApi: [],
+          score: 0,
+          createdAt: [],
+        };
+      }
+
+      state.getAllResults[data.player].idPlayer = data.id;
+      state.getAllResults[data.player].namePlayer = data.player;
+      state.getAllResults[data.player].round = data.round;
+      state.getAllResults[data.player].answer.push(data.answer);
+      state.getAllResults[data.player].answerApi.push(data.result);
+      if (data.answer === data.result) {
+        state.getAllResults[data.player].score =
+          state.getAllResults[data.player].score + 1;
+      }
+      state.getAllResults[data.player].createdAt.push(data.date);
+    }
 
   },
 
@@ -80,7 +99,8 @@ export const {
   saveRoundList,
   nextPlayer,
   saveResult,
-  saveResultApi
+  saveResultApi,
+  saveAllResult
 } = counterSlice.actions;
 
 

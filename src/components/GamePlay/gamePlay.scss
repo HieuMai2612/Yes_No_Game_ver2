@@ -51,6 +51,8 @@
     flex-direction: column;
     justify-content: flex-start;
     margin: 60px;
+    padding: 10px;
+    border: 5px solid #000;
     &-btn {
       display: flex;
       &-yes {

@@ -71,10 +71,6 @@ const TablePlayer = () => {
                     });
 
                 });
-                setTimeout(() => {
-
-
-                }, 3000);
 
                 link("/game-play");
             } else {

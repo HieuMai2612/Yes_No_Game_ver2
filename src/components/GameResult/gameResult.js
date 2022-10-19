@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
     getPlayer,
     results,
-    resultsApi, saveResult
+    resultsApi, saveAllResult
 } from '../../features/counter/counterSlice';
 import axios from 'axios';
 // import axios from '../../api/Api';
@@ -27,8 +27,6 @@ const GameResult = () => {
         ]);
     }
 
-
-
     const winnerIs = (index, resultApi) => {
         const player1 = resultPlayer.filter(
             (item) => item.namePlayer === player[0].name
@@ -36,18 +34,62 @@ const GameResult = () => {
         const player2 = resultPlayer.filter(
             (item) => item.namePlayer === player[1].name
         );
+
+
         if (player1[index].answer === resultApi) {
+            dispatch(
+                saveAllResult({
+                    id: player1[index].idPlayer,
+                    round: player1[index].round,
+                    player: player1[index].namePlayer,
+                    date: player1[index].createdAt,
+                    answer: player1[index].answer,
+                    result: resultApi,
+                })
+            );
+            dispatch(
+                saveAllResult({
+                    id: player2[index].idPlayer,
+                    round: player2[index].round,
+                    player: player2[index].namePlayer,
+                    date: player2[index].createdAt,
+                    answer: player2[index].answer,
+                    result: resultApi,
+                })
+            );
             return player1[index].namePlayer;
         } else if (player2[index].answer === resultApi) {
+
+            dispatch(
+                saveAllResult({
+                    id: player1[index].idPlayer,
+                    round: player1[index].round,
+                    player: player1[index].namePlayer,
+                    date: player1[index].createdAt,
+                    answer: player1[index].answer,
+                    result: resultApi,
+                })
+            );
+            dispatch(
+                saveAllResult({
+                    id: player2[index].idPlayer,
+                    round: player2[index].round,
+                    player: player2[index].namePlayer,
+                    date: player2[index].createdAt,
+                    answer: player2[index].answer,
+                    result: resultApi,
+                })
+            );
             return player2[index].namePlayer;
-        } else {
-            return 'draw'
         }
+
+
     };
+
+
     useEffect(() => {
         axios.get("https://yesno.wtf/api").then((res) => setImage(res.data.image));
     }, []);
-    console.log(resultApi)
     return (
         <div className='game-container'>
             <div className='game-header'>

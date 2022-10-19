@@ -10,25 +10,29 @@ import {
     nextPlayer,
     saveResultApi,
     saveResult,
-    resultsApi
+    resultsApi,
+    saveAllResult
 } from '../../features/counter/counterSlice';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faCoffee, faXmark } from '@fortawesome/free-solid-svg-icons';
 // import axios from '../../api/Api';
 const GamePlay = () => {
     const round = useSelector(roundList);
     const player = useSelector(getPlayer);
     const playerIndex = useSelector(indexPlayer);
     const [playerAnswer, setPlayerAnswer] = useState([]);
-
     //show btn when clicked
     const [showBtn, setShowBtn] = useState(true);
     const [showSelketon, setShowSelketon] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
+
     const dispatch = useDispatch();
     const link = useNavigate();
 
     const onClickSubmit = () => {
+
         if (playerIndex < player.length - 1) {
             dispatch(saveResult(playerAnswer));
             dispatch(nextPlayer());
@@ -75,6 +79,7 @@ const GamePlay = () => {
                 idPlayer: player[playerIndex].id,
                 namePlayer: player[playerIndex].name,
                 answer: "yes",
+                createdAt: new Date().toISOString(),
             },
         ]);
     };
@@ -87,6 +92,7 @@ const GamePlay = () => {
                 idPlayer: player[playerIndex].id,
                 namePlayer: player[playerIndex].name,
                 answer: "no",
+                createdAt: new Date().toISOString(),
             },
         ]);
     };
@@ -103,6 +109,7 @@ const GamePlay = () => {
             <div className='game-body'>
                 <div className='game-body-title'>
                     <div className='game-body-match'>
+                        <FontAwesomeIcon icon={faCoffee} />
                         Player:
                         {player[playerIndex].name}
                     </div>
@@ -121,8 +128,13 @@ const GamePlay = () => {
                                         <Placeholder style={{ height: 120 + 'px', width: 400 + 'px' }} xs={12} />
                                     </Placeholder> :
                                     <div className='game-body-choose-btn'>
-                                        <Button onClick={() => onClickYes(item)} className='game-body-choose-btn-yes' variant="outline-dark">YES</Button>
-                                        <Button onClick={() => onClickNo(item)} className='game-body-choose-btn-no' variant="outline-dark">NO</Button>
+
+                                        <Button onClick={() => onClickYes(item)} className='game-body-choose-btn-yes' variant="outline-dark">
+                                            <FontAwesomeIcon icon={faCheck} />    YES
+                                        </Button>
+                                        <Button onClick={() => onClickNo(item)} className='game-body-choose-btn-no' variant="outline-dark">
+                                            <FontAwesomeIcon icon={faXmark} />      NO
+                                        </Button>
                                     </div>
                                 }
                             </div>

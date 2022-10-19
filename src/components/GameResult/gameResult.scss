@@ -28,26 +28,29 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      &-info {
+        padding: 10px 20px 0 0;
+      }
     }
     .btn-result {
     }
-    .result-message {
-      margin: 10px 80px;
-      &-correct {
-        background-color: rgb(19, 212, 8);
-        color: white;
-        width: 120px;
-        height: 40px;
-        border-radius: 5px;
-      }
-      &-incorrect {
-        background-color: rgb(212, 8, 8);
-        color: white;
-        width: 120px;
-        height: 40px;
-        border-radius: 5px;
-      }
-    }
+    // .result-message {
+    //   margin: 10px 80px;
+    //   &-correct {
+    //     background-color: rgb(19, 212, 8);
+    //     color: white;
+    //     width: 120px;
+    //     height: 40px;
+    //     border-radius: 5px;
+    //   }
+    //   &-incorrect {
+    //     background-color: rgb(212, 8, 8);
+    //     color: white;
+    //     width: 120px;
+    //     height: 40px;
+    //     border-radius: 5px;
+    //   }
+    // }
   }
 }
 
