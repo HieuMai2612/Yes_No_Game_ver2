@@ -55,13 +55,13 @@ const GamePlay = () => {
             setTimeout(() => {
                 link("/game-result");
             }, 1000);
-            // round.map(async (item) => {
-            //     await axios.get("https://yesno.wtf/api").then((res) => {
-            //         dispatch(saveResultApi({ round: item, result: res.data.answer })
-            //         );
-            //     });
-            //   
-            // });
+            round.map(async (item) => {
+                await axios.get("https://yesno.wtf/api").then((res) => {
+                    dispatch(saveResultApi({ round: item, result: res.data.answer })
+                    );
+                });
+
+            });
 
 
 
