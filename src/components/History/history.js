@@ -48,6 +48,7 @@ const History = () => {
     });
 
     const playerSum = filtered.map((results, index) => {
+
         return (
             <tr key={index}>
                 <td>{results?.namePlayer}</td>
@@ -56,7 +57,6 @@ const History = () => {
             </tr>
         );
     });
-
 
     return (
         <>
