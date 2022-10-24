@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    getPlayer,
     getPlayerName,
     idPlayer
 } from '../../features/counter/counterSlice';
@@ -32,9 +31,6 @@ const AddPlayer = () => {
             navigate("../list-players", { replace: true });
         }, 500)
     };
-
-
-
 
 
     return (

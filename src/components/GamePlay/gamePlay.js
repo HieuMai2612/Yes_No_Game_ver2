@@ -6,96 +6,154 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
     roundList,
     getPlayer,
-    indexPlayer,
-    nextPlayer,
     saveResultApi,
     saveResult,
     resultsApi,
-    saveAllResult
+    saveAllResult,
+    results
 } from '../../features/counter/counterSlice';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCoffee, faXmark } from '@fortawesome/free-solid-svg-icons';
 // import axios from '../../api/Api';
 const GamePlay = () => {
+    const apiResults = useSelector(resultsApi);
+
     const round = useSelector(roundList);
     const player = useSelector(getPlayer);
-    const playerIndex = useSelector(indexPlayer);
-    const [playerAnswer, setPlayerAnswer] = useState([]);
+    const getResults = useSelector(results);
+    console.log("🚀 ~ file: gamePlay.js ~ line 26 ~ GamePlay ~ getResults", getResults)
     //show btn when clicked
     const [showBtn, setShowBtn] = useState(true);
     const [showSelketon, setShowSelketon] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
+    // set state for player with answer
+    const [answerPlayerOne, setAnswerPlayerOne] = useState([]);
+    const [answerPlayerTwo, setAnswerPlayerTwo] = useState([]);
 
     const dispatch = useDispatch();
     const link = useNavigate();
 
+
+    useEffect(() => {
+        setAnswerPlayerOne(
+            round.map(() => {
+                return "yes";
+            })
+        );
+        setAnswerPlayerTwo(
+            round.map(() => {
+                return "no";
+            })
+        );
+    }, []);
+
+    console.log(player[0].id)
+
+
     const onClickSubmit = () => {
 
-        if (playerIndex < player.length - 1) {
-            dispatch(saveResult(playerAnswer));
-            dispatch(nextPlayer());
-            setPlayerAnswer([]);
-            setShowBtn(false);
-            setIsLoading(true);
-            setShowSelketon(true);
-            setTimeout(() => {
-                setIsLoading(false);
-                setShowSelketon(false);
-                setShowBtn(true);
-            }, 3000);
-        } else {
-            dispatch(saveResult(playerAnswer));
-            setShowBtn(false);
-            setIsLoading(true);
-            setShowSelketon(true);
-            setTimeout(() => {
-                setIsLoading(false);
-                setShowSelketon(false);
-                setShowBtn(true);
-            }, 2000);
+        setShowBtn(false);
+        setIsLoading(true);
+        setShowSelketon(true);
+        setTimeout(() => {
+            setIsLoading(false);
+            setShowSelketon(false);
+            setShowBtn(true);
+        }, 2000);
+        round.map(async (item) => {
+            await axios.get("https://yesno.wtf/api")
+                .then((res) => {
+                    // let api = res.data.answer;
+                    // answersApi = [...apiResults, api];
+                    dispatch(saveResultApi({
+                        round: item,
+                        rounds: round,
+                        // resultApi: apiResults,
+                        idPlayer: player[0].id,
+                        namePlayer: player[0].name,
+                        answer: answerPlayerOne,
+                        createdAt: new Date().toISOString(),
+                    }),
+                        dispatch(saveResultApi({
+                            round: item,
+                            rounds: round,
+                            // resultApi: apiResults,
+                            idPlayer: player[1].id,
+                            namePlayer: player[1].name,
+                            answer: answerPlayerTwo,
+                            createdAt: new Date().toISOString(),
+                        })
 
-            setTimeout(() => {
-                link("/game-result");
-            }, 1000);
-            round.map(async (item) => {
-                await axios.get("https://yesno.wtf/api").then((res) => {
-                    dispatch(saveResultApi({ round: item, result: res.data.answer })
-                    );
+                            // if (player[0].id === 1) {
+                            //     dispatch(saveAllResult({
+                            //         idPlayer: player[0].id,
+                            //         round: round[0],
+                            //         namePlayer: player[0].name,
+                            //         answerApi: res.data.answer,
+                            //         answerPlayer: answerPlayerOne,
+                            //         createdAt: new Date().toISOString(),
+
+                            //     }));
+                            // }
+                        ))
                 });
 
-            });
+        });
 
 
+        // player.forEach((item) => {
+        //     let data = {
+        //         score: 0,
+        //         win: [],
+        //         date: new Date().toLocaleString(),
+        //         isValid: false,
+        //     };
+        // });
+        // setTimeout(() => {
+        //     link("/game-result");
+        // }, 1000);
+        // round.map(async (item) => {
+        //     await axios.get("https://yesno.wtf/api").then((res) => {
+        //         dispatch(saveResultApi({
+        //             round: item,
+        //             resultApi: res.data.answer,
+        //             idPlayer: player[0].id,
+        //             namePlayer: player[0].name,
+        //             answer: [],
+        //             createdAt: new Date().toISOString(),
+        //         }),
+        //         );
+        //     });
 
-        }
+        // });
     }
-    const onClickYes = (roundItem) => {
-        setPlayerAnswer([
-            ...playerAnswer,
-            {
-                round: roundItem,
-                idPlayer: player[playerIndex].id,
-                namePlayer: player[playerIndex].name,
-                answer: "yes",
-                createdAt: new Date().toISOString(),
-            },
-        ]);
-    };
+    // const onClickYes = (roundItem) => {
+    //     setPlayerAnswer([
+    //         ...playerAnswer,
+    //         {
+    //             round: roundItem,
+    //             idPlayer: player[playerIndex].id,
+    //             namePlayer: player[playerIndex].name,
+    //             answer: "yes",
+    //             createdAt: new Date().toISOString(),
+    //         },
+    //     ]);
+    // };
 
-    const onClickNo = (roundItem) => {
-        setPlayerAnswer([
-            ...playerAnswer,
-            {
-                round: roundItem,
-                idPlayer: player[playerIndex].id,
-                namePlayer: player[playerIndex].name,
-                answer: "no",
-                createdAt: new Date().toISOString(),
-            },
-        ]);
-    };
+    // const onClickNo = (roundItem) => {
+    //     setPlayerAnswer([
+    //         ...playerAnswer,
+    //         {
+    //             round: roundItem,
+    //             idPlayer: player[playerIndex].id,
+    //             namePlayer: player[playerIndex].name,
+    //             answer: "no",
+    //             createdAt: new Date().toISOString(),
+    //         },
+    //     ]);
+    // };
 
     return (
         <div className='game-container'>
@@ -109,9 +167,11 @@ const GamePlay = () => {
             <div className='game-body'>
                 <div className='game-body-title'>
                     <div className='game-body-match'>
-                        <FontAwesomeIcon icon={faCoffee} />
-                        Player:
-                        {player[playerIndex].name}
+                        <FontAwesomeIcon icon={faCoffee} style={{ color: "green", marginRight: 10 + 'px ' }} />
+                        Player :
+                        <div style={{ color: "green" }}> {player[0].name}</div>,
+                        <div style={{ color: "red" }}> {player[1].name}</div>
+
                     </div>
                 </div>
 
@@ -129,10 +189,18 @@ const GamePlay = () => {
                                     </Placeholder> :
                                     <div className='game-body-choose-btn'>
 
-                                        <Button onClick={() => onClickYes(item)} className='game-body-choose-btn-yes' variant="outline-dark">
+                                        <Button
+
+                                            className='game-body-choose-btn-yes'
+                                            variant="outline-dark"
+                                        >
                                             <FontAwesomeIcon icon={faCheck} />    YES
                                         </Button>
-                                        <Button onClick={() => onClickNo(item)} className='game-body-choose-btn-no' variant="outline-dark">
+                                        <Button
+
+                                            className='game-body-choose-btn-no'
+                                            variant="outline-dark"
+                                        >
                                             <FontAwesomeIcon icon={faXmark} />      NO
                                         </Button>
                                     </div>

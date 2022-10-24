@@ -3,11 +3,10 @@ import axios from "axios";
 
 const initialState = {
   getPlayer: [],
-  idPlayer: 1,
-  indexPlayer: 0,
+  // idPlayer: 1,
+  // indexPlayer: 0,
   questions: [],
   playerCount: 2,
-  matchId: [],
   roundList: [],
   answer: "",
   resultsApi: [],
@@ -26,6 +25,18 @@ export const counterSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
+    reloadLocal: (state, action) => {
+      state.getPlayer = [];
+      state.idPlayer = 1;
+      state.indexPlayer = 0;
+      state.questions = [];
+      state.playerCount = 2;
+      state.roundList = [];
+      state.answer = "";
+      state.resultsApi = [];
+      state.results = [];
+      state.getAllResults = {}
+    },
     saveName1: (state, action) => {
       state.name1 = action.payload;
     },
@@ -43,13 +54,8 @@ export const counterSlice = createSlice({
       state.roundList = data;
     },
 
-    nextPlayer: (state, action) => {
-      state.indexPlayer += 1;
-    },
-
     saveResult: (state, action) => {
       state.results = [...state.results, ...action.payload];
-
     },
     saveResultApi: (state, action) => {
       state.resultsApi.push(action.payload);
@@ -62,9 +68,9 @@ export const counterSlice = createSlice({
           idPlayer: "",
           round: "",
           namePlayer: "",
-          answer: [],
-          answerApi: [],
           score: 0,
+          answerPlayer: [],
+          answerApi: [],
           createdAt: [],
         };
       }
@@ -72,7 +78,7 @@ export const counterSlice = createSlice({
       state.getAllResults[data.player].idPlayer = data.id;
       state.getAllResults[data.player].namePlayer = data.player;
       state.getAllResults[data.player].round = data.round;
-      state.getAllResults[data.player].answer.push(data.answer);
+      state.getAllResults[data.player].answerPlayer.push(data.answer);
       state.getAllResults[data.player].answerApi.push(data.result);
       if (data.answer === data.result) {
         state.getAllResults[data.player].score =
@@ -97,24 +103,23 @@ export const {
   getPlayerName,
   incrementIdPlayer,
   saveRoundList,
-  nextPlayer,
   saveResult,
   saveResultApi,
-  saveAllResult
+  saveAllResult,
+  reloadLocal
 } = counterSlice.actions;
 
 
-export const questions = (state) => state.counter.questions;
-export const name1 = (state) => state.counter.name1;
-export const name2 = (state) => state.counter.name2;
-export const getPlayer = (state) => state.counter.getPlayer;
-export const idPlayer = (state) => state.counter.idPlayer;
-export const roundList = (state) => state.counter.roundList;
-export const matchId = (state) => state.counter.matchId;
-export const indexPlayer = (state) => state.counter.indexPlayer;
-export const results = (state) => state.counter.results;
-export const resultsApi = (state) => state.counter.resultsApi;
-export const createdAt = (state) => state.counter.createdAt;
-export const getAllResults = (state) => state.counter.getAllResults;
+export const questions = (state) => state.counter.counter.questions;
+export const name1 = (state) => state.counter.counter.name1;
+export const name2 = (state) => state.counter.counter.name2;
+export const getPlayer = (state) => state.counter.counter.getPlayer;
+export const idPlayer = (state) => state.counter.counter.idPlayer;
+export const roundList = (state) => state.counter.counter.roundList;
+// export const indexPlayer = (state) => state.counter.counter.indexPlayer;
+export const results = (state) => state.counter.counter.results;
+export const resultsApi = (state) => state.counter.counter.resultsApi;
+export const createdAt = (state) => state.counter.counter.createdAt;
+export const getAllResults = (state) => state.counter.counter.getAllResults;
 
 export default counterSlice.reducer;

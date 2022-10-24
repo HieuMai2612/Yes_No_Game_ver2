@@ -64,14 +64,6 @@ const TablePlayer = () => {
         try {
             if (typeof JSON.parse(round) === "number") {
                 dispatch(saveRoundList(Array.from(Array(JSON.parse(round)).keys())));
-                getRoundList.map(async (item) => {
-                    await axios.get("https://yesno.wtf/api").then((res) => {
-                        dispatch(saveResultApi({ round: item, result: res.data.answer })
-                        );
-                    });
-
-                });
-
                 link("/game-play");
             } else {
                 return;

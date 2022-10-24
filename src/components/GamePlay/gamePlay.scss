@@ -59,11 +59,15 @@
       &-yes {
         width: 200px;
         height: 100px;
+        color: green;
+        font-size: 40px;
       }
       &-no {
         width: 200px;
         height: 100px;
         margin-left: 10px;
+        color: red;
+        font-size: 40px;
       }
     }
 

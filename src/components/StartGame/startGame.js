@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, } from "react-bootstrap";
 import Header from '../../page/header';
 import AddPlayer from '../AddPlayer/addPlayer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, } from 'react-redux';
-import { getAnswer } from '../../features/counter/counterSlice';
+import { getAnswer, reloadLocal } from '../../features/counter/counterSlice';
 
 const StartGame = () => {
 
@@ -18,6 +18,12 @@ const StartGame = () => {
         getShowStart(false);
         dispatch(getAnswer());
     };
+
+
+    useEffect(() => {
+        localStorage.clear();
+        dispatch(reloadLocal());
+    }, []);
 
     return (
         <div className="start-game">
